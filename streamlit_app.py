@@ -795,7 +795,7 @@ if __name__ == "__main__":
         if st.checkbox('Marque para ver o código', key='h1'):
             st.code(code)
 
-        st.subheader('H2 - Imóveis com data de construção menor que 1955 são 50% mais baratas na média')
+        st.subheader('H2 - Imóveis com data de construção menor que 1955 são 50% mais baratos na média')
         result, code = hypotheses2(data)
         st.write(result)
 
@@ -830,7 +830,7 @@ if __name__ == "__main__":
         if st.checkbox('Marque para ver o código', key='h6'):
             st.code(code)
 
-        st.subheader('H7 - Imóveis com vista para água ficam em torno de 20% mais caros durante verão')
+        st.subheader('H7 - Imóveis com vista para água ficam em torno de 10% mais caros durante verão')
         result, code = hypotheses7(data)
         st.write(result)
 
