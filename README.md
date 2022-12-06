@@ -1,6 +1,8 @@
 # Projeto House Rocket - Empresa fictícia de compra e venda de imóveis
 Este projeto tem por objetivo auxiliar o time de negócio da empresa House Rocket a tomar decisões embasadas em dados.
 
+Projeto publicado na URL: https://nickoboco-house-rocket-insights-streamlit-app-zj8dfp.streamlit.app/
+
 ## Questão de negócio
 A empresa House Rocket decidiu investir na região de Seattle e o CEO da companhia fez alguns quesitonamentos ao time de dados com relação a isso. Com isso em mente, o time de dados têm agora a responsabilidade de realizar uma análise do mercado imobiliário dessa região. Portanto, este projeto tem por objetivo identificar insights que apoiem nas tomadas de decisões, respondendo as perguntas do CEO e maximizando o lucro da empresa.
 
