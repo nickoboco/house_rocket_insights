@@ -4,7 +4,6 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import folium
-import geopandas
 from streamlit_folium import folium_static
 from folium.plugins import MarkerCluster
 
@@ -53,13 +52,10 @@ def dataframe_show (data):
     
     return None
 
-def get_geofile(url):
-    geofile = geopandas.read_file(url)
-    return geofile
 
-def portifolio_density(data, geofile):
+def portifolio_density(data):
     # Mapa
-    st.title('🌎 Mapas')
+    st.title('🌎 Mapa')
     st.subheader('Exploração do portifólio')
     st.write('O mapa abaixo apresenta todo o portifólio da base e com isso é possível analisar a distribuição de imóveis por região. ' \
              'Ao clicar no imóvel, é exibido as principais caracteristicas dele.')
@@ -83,29 +79,6 @@ def portifolio_density(data, geofile):
                 marker_cluster)
 
         folium_static(density_map)
-
-    # region Price Map
-    st.subheader('Densidade de preço')
-    st.write('O mapa de calor abaixo representa a média de preço por região (Zip code).')
-
-    if st.checkbox('Marque para exibir o mapa', key='density'):
-
-        df = data[['price', 'zipcode']].groupby('zipcode').mean().reset_index()
-        df.columns = ['ZIP', 'PRICE']
-
-        geofile = geofile[geofile['ZIP'].isin(df['ZIP'].tolist())]
-
-        region_price_map = folium.Map(location=[data['lat'].mean(), data['long'].mean()], default_zoom_start=15)
-        region_price_map.choropleth(data=df,
-                                    geo_data=geofile,
-                                    columns=['ZIP', 'PRICE'],
-                                    key_on='feature.properties.ZIP',
-                                    fill_color='YlOrRd',
-                                    fill_opacity=0.7,
-                                    line_opacity=0.2,
-                                    legend_name='Average price')
-
-        folium_static(region_price_map)
 
     return None
 
@@ -720,9 +693,6 @@ if __name__ == "__main__":
     path = './datasets/kc_house_data.csv'
     data = get_data(path)
 
-    url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'
-    geofile = get_geofile(url)
-
     #data transformation
     #formatting date
     data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d')
@@ -754,7 +724,7 @@ if __name__ == "__main__":
         #exploring data
         st.header("📊 Análise exploratória")
         dataframe_show(data)
-        portifolio_density(data, geofile)
+        portifolio_density(data)
 
     elif navigation == options[2]:
         #Answers to CEO's questions
